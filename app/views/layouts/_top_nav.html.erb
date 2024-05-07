@@ -22,7 +22,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li>
-        <%= link_to 'About us', :about_index %>
+        <%= link_to 'About ', :about_index %>
         </li>
         <%# <li class="nav-item dropdown">
           <a
@@ -36,6 +36,7 @@
             <%# Categories %>
           <%# </a>
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown"> %>
+            <li><%= link_to 'Categories', [:admin, :categories] %></li>
             <% Category.all.each do |category| %>
             <li class="nav-item">
               <%= link_to category.name, category, class: "nav-link" %>

@@ -58,11 +58,6 @@ class OrdersController < ApplicationController
   end
 
   def list_order_items order
-    #@line_items is an array
-    # need to loop over it and assign the relevant fields
-    # @img, @name, @description, @quantity, @line_total
     order.map {|item| { name: item.name, quantity: item.quantity, description: item.description }}
-    # Product.where(id: cart.keys).map {|product| { product:product, quantity: cart[product.id.to_s] }
   end
-  
 end

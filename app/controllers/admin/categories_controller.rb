@@ -1,18 +1,11 @@
 class Admin::CategoriesController < ApplicationController
 
-  def index
-    @category_name_to_id = {}
-    @product_per_category_count = {}
-    @categories = Category.all
-    @product_category = Category.joins(:products)
-    @categories.each do |c|
-      @product_per_category_count[c.name] = 0
-      @category_name_to_id[c.name] = c.id
-    end
+  http_basic_authenticate_with name: ENV['username'], password: ENV['password']
 
-    @product_category.map do |n|
-      @product_per_category_count[n.name] += 1
-    end
+  before_action :authorize
+  
+  def index
+    @categories = Category.order(id: :desc).all
   end
 
   def new
@@ -23,7 +16,7 @@ class Admin::CategoriesController < ApplicationController
     @category = Category.new(category_params)
 
     if @category.save
-      redirect_to[:admin, :categories], notice: 'Product created!'
+      redirect_to [:admin, :categories], notice: 'Category created!'
     else
       render :new
     end

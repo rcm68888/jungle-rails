@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   root to: 'products#index'
   get '/about', to: 'about#index'
 
-  resources :products, only: [:index, :show]
+  resources :products, only: [:index, :show] do
+    root to: 'reviews#create'
+    resource :reviews, only: [:create, :destroy]
+  end
   resources :categories, only: [:show]
 
   resource :cart, only: [:show] do

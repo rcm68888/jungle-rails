@@ -10,6 +10,7 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find params[:id]
     @price = number_to_currency(@product.price, options = { delimiter: ","} )
+    @review = Review.new
   end
 
 end
